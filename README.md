@@ -8,3 +8,4 @@
 - 🥅 2022 Goals: Learn more about Data Science
 - ⚡ Fun fact: I love to Eat and Travel
 
+![Pranav's GitHub stats](https://github-readme-stats.vercel.app/api?username=pranavdhawale)
