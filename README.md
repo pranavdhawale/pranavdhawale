@@ -7,8 +7,8 @@
 - 📚 I’m currently learning Data Science using Python 🐍
 - 🥅 2022 Goals: Learn more about Data Science ⚛️
 - ⚡ Fun fact: I love to Eat 🍽️ and Travel 🧳
-- 🎓 Pursing Diploma in Computer Engineering 🖥️
-- 💼 Intern at [LetsGrowMore](https://letsgrowmore.in/) 🧑‍💻
+- 🎓 Education: Pursing Diploma in Computer Engineering 🖥️
+- 💼 Status: Intern at [LetsGrowMore](https://letsgrowmore.in/) 🧑‍💻
 
 ### Connect Me
 [![LinkedIn](./img/linkedin-light.svg)](https://www.linkedin.com/in/pranav-dhawale-324452212/#gh-light-mode-only)
