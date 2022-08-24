@@ -20,4 +20,4 @@
 [![Instagram](./img/instagram-light.svg)](https://www.instagram.com/pranav_dhawale_19/#gh-light-mode-only)
 [![Instagram](./img/instagram-dark.svg)](https://www.instagram.com/pranav_dhawale_19/#gh-dark-mode-only)
 
-![Pranav's GitHub stats](https://github-readme-stats.vercel.app/api?username=pranavdhawale&custom_title=pranavdhawale's%20Github%20Stats&hide=issues,contribs&count_private=true&include_all_commits=true&bg_color=000000&title_color=443cab&text_color=ffffff&show_icons=true&icon_color=fbff0f&border_color=000000)
+![Pranav's GitHub stats](https://github-readme-stats.vercel.app/api?username=pranavdhawale&custom_title=pranavdhawale's%20Github%20Stats&hide=issues,contribs&count_private=true&bg_color=000000&title_color=443cab&text_color=ffffff&show_icons=true&icon_color=fbff0f&border_color=000000)
