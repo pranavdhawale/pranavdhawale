@@ -10,15 +10,15 @@
 - 🎓 Education: Pursing Diploma in Computer Engineering 🖥️
 - 💼 Status: Intern at [LetsGrowMore](https://letsgrowmore.in/) 🧑‍💻
 
+<br>
+
 ### Languages & Tools
-<code><img alt="Python" height="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" /></code>
-<code><img alt="MongoDB" height="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" /></code>
-<code><img alt="MySQL" height="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" /></code>
-
-
+<code><img alt="Python" height="20px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" /></code>
+<code><img alt="MongoDB" height="20px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" /></code>
+<code><img alt="MySQL" height="20px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" /></code>
+<code><img alt="Linux" height="20px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" /></code>
+ 
 <br>
-<br>
-
 
 ### Connect Me
 [![LinkedIn](./img/linkedin-light.svg)](https://www.linkedin.com/in/pranav-dhawale-324452212/#gh-light-mode-only)
@@ -32,4 +32,4 @@
 
 ![Pranav's GitHub stats](https://github-readme-stats.vercel.app/api?username=pranavdhawale&custom_title=pranavdhawale's%20Github%20Stats&hide=issues,contribs&count_private=true&bg_color=000000&title_color=443cab&text_color=ffffff&show_icons=true&icon_color=fbff0f&border_color=000000)
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=pranavdhawale&layout=compact&bg_color=000000&border_color=000000&text_color=ffffff&border_radius=10px)](https://github.com/pranavdhawale/github-readme-stats)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=pranavdhawale&layout=compact&bg_color=000000&border_color=000000&text_color=ffffff&border_radius=10px)](https://github.com/pranavdhawale/github-readme-stats)s
