@@ -26,7 +26,7 @@
 [![Instagram](./img/instagram.svg)](https://www.instagram.com/pranav_dhawale_19/)
 
 <details>
-<summary>GitHub Stats</summary>
+<summary>⚡ GitHub Stats</summary>
 
 ![Pranav's GitHub stats](https://github-readme-stats.pranavdhawale.vercel.app/api?username=pranavdhawale&custom_title=pranavdhawale's%20Github%20Stats&hide=issues,contribs&count_private=true&show_icons=true&include_all_commits=true&hide_border=true&bg_color=000000&title_color=443cab&text_color=ffffff&icon_color=fbff0f&show_icons=true)
 
