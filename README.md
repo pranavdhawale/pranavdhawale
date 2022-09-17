@@ -2,7 +2,6 @@
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/pranavdhawale19?color=1DA1F2&logo=twitter&style=for-the-badge)](https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fgithub.com%2Fpranavdhawale19&screen_name=pranavdhawale19)
 
-![Github Profile Views](https://komarev.com/ghpvc/?username=pranavdhawale&color=181717&style=flat-square&label=Profile+Views)
 
 ## I'm a Student and Developer
 
@@ -36,4 +35,8 @@
 
 </details>
 
-<!-- START_SECTION:activity -->
+<div align="right" size="">
+
+![Github Profile Views](https://komarev.com/ghpvc/?username=pranavdhawale&color=181717&style=flat-square&label=Profile+Views)
+
+</div>
