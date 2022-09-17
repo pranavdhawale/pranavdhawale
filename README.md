@@ -34,4 +34,5 @@
 
 </details>
 
+⚡ Recent Activity
 <!-- START_SECTION:activity -->
