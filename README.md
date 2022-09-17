@@ -35,3 +35,9 @@
 ![Pranav's Top Langs](https://github-readme-stats.pranavdhawale.vercel.app/api/top-langs/?username=pranavdhawale&layout=compact&hide_border=true&bg_color=000000&title_color=443cab&text_color=ffffff&icon_color=fbff0f&show_icons=true)
 
 </details>
+
+<div align="right">
+
+![Github Profile Views](https://komarev.com/ghpvc/?username=pranavdhawale&color=181717&style=flat-square&label=Profile+Views)
+
+</div>
