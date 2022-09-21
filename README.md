@@ -29,9 +29,9 @@
 <details>
 <summary>⚡ GitHub Stats</summary>
 
-![Pranav's GitHub stats](https://github-readme-stats.pranavdhawale.vercel.app/api?username=pranavdhawale&custom_title=pranavdhawale's%20Github%20Stats&hide=issues,contribs&count_private=true&show_icons=true&include_all_commits=true&hide_border=true&bg_color=000000&title_color=443cab&text_color=ffffff&icon_color=fbff0f&show_icons=true)
+![Pranav's GitHub stats](https://github-readme-stats.pranavdhawale.vercel.app/api?username=pranavdhawale&custom_title=pranavdhawale's%20Github%20Stats&hide=issues,contribs&count_private=true&show_icons=true&include_all_commits=true&hide_border=true&theme=vision-friendly-dark&show_icons=true)
 
-![Pranav's Top Langs](https://github-readme-stats.pranavdhawale.vercel.app/api/top-langs/?username=pranavdhawale&layout=compact&hide_border=true&bg_color=000000&title_color=443cab&text_color=ffffff&icon_color=fbff0f&show_icons=true)
+![GitHub Streak](https://github-readme-streak-stats-pmd.herokuapp.com?user=pranavdhawale&theme=vision-friendly-dark&hide_border=true)
 
 </details>
 
