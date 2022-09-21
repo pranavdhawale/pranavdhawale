@@ -25,6 +25,8 @@
 [![Twitter](./img/twitter.svg)](https://twitter.com/pranavdhawale19)
 &nbsp;&nbsp;
 [![Instagram](./img/instagram.svg)](https://www.instagram.com/pranav_dhawale_19/)
+&nbsp;&nbsp;
+[![Mail](./img/gmail.svg)](mailto:pranavdhawale19@gmail.com)
 
 <details>
 <summary>⚡ GitHub Stats</summary>
