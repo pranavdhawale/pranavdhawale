@@ -28,6 +28,11 @@
 
 ![Pranav's GitHub stats](https://github-readme-stats.pranavdhawale.vercel.app/api?username=pranavdhawale&custom_title=pranavdhawale's%20Github%20Stats&hide=issues,contribs&count_private=true&show_icons=true&include_all_commits=true&hide_border=true&theme=vision-friendly-dark&show_icons=true)
 
+</details>
+
+<details>
+<summary>⚡ Github Streak</summary>
+
 ![GitHub Streak](https://github-readme-streak-stats-pmd.herokuapp.com?user=pranavdhawale&theme=vision-friendly-dark&hide_border=true)
 
 </details>
