@@ -6,7 +6,7 @@
 - 🥅 2022 Goals: Learn more about Data Science ⚛️
 - ⚡ Fun fact: I love to Eat 🍽️ and Travel 🧳
 - 🎓 Education: Pursing Diploma in Computer Engineering 🖥️
-- 💼 Status: Intern at [LetsGrowMore](https://letsgrowmore.in/) 🧑‍💻
+
 
 
 ### Languages & Tools
