@@ -2,7 +2,7 @@
 
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?color=ffecd2&size=29&multiline=true&width=900&lines=Welcome+To+The+Pranav+Dhawale's+Github+Profile)](https://git.io/typing-svg)
 
-<img src="../pranavdhawale/img/banner(2).png">
+<img src="./img/banner.png">
 
 ## About Me: 🤗
 
