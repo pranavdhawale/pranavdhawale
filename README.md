@@ -19,7 +19,7 @@
 ![](https://img.shields.io/badge/React-ffffff?style=for-the-badge&logo=react&logoColor=61DBFB)
 ![](https://img.shields.io/badge/MongoDB-4DB33D?style=for-the-badge&logo=mongodb&logoColor=3F3E42)
 ![](https://img.shields.io/badge/MYSQL-f29111?style=for-the-badge&logo=mysql&logoColor=00758F)
-![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
+![](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white)
 ![](https://img.shields.io/badge/Linux-000000?style=for-the-badge&logo=linux&logoColor=yellow)
 
 ## Connect with me: 💻
