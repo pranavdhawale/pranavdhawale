@@ -1,36 +1,45 @@
-# Hola Amigos,<br> I'm Pranav - aka [NoddY] 👋 
+<!-- # Hola Amigos,<br> I'm Pranav - aka [NoddY] 👋 -->
 
-## I'm a Student and Developer
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=ffecd2&size=29&multiline=true&width=900&lines=Welcome+To+The+Pranav+Dhawale's+Github+Profile)](https://git.io/typing-svg)
 
-- 📚 I’m currently learning Data Science using Python 🐍
-- 🥅 2022 Goals: Learn more about Data Science ⚛️
-- ⚡ Fun fact: I love to Eat 🍽️ and Travel 🧳
+<img src="../pranavdhawale/img/banner(2).png">
+
+## About Me: 🤗
+
+- 📚 I’m currently exploring MERN Stack
+- 🥅 2023 Goals: Learn more about Web Development 🕸️
+- 👯 I’m looking to collaborate on Real World Applications 😃
+- ⚡ Fun fact: I ❤️ to Eat 🍽️ and Travel 🧳
 - 🎓 Education: Pursing Diploma in Computer Engineering 🖥️
 
+## Languages & Tools: 🧰
 
+![](https://img.shields.io/badge/Python-ffde57?style=for-the-badge&logo=python)
+![](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![](https://img.shields.io/badge/React-ffffff?style=for-the-badge&logo=react&logoColor=61DBFB)
+![](https://img.shields.io/badge/MongoDB-4DB33D?style=for-the-badge&logo=mongodb&logoColor=3F3E42)
+![](https://img.shields.io/badge/MYSQL-f29111?style=for-the-badge&logo=mysql&logoColor=00758F)
+![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
+![](https://img.shields.io/badge/Linux-000000?style=for-the-badge&logo=linux&logoColor=yellow)
 
-### Languages & Tools
-<code><img alt="Python" height="24px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" /></code>
-<code><img alt="MongoDB" height="24px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" /></code>
-<code><img alt="MySQL" height="24px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" /></code>
-<code><img alt="Linux" height="24px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" /></code>
- 
+## Connect with me: 💻
 
-### Connect Me
-[![LinkedIn](./img/linkedin.svg)](https://www.linkedin.com/in/pranav-dhawale-324452212/)
-&nbsp;&nbsp;
-[![Twitter](./img/twitter.svg)](https://twitter.com/pranavdhawale19)
-&nbsp;&nbsp;
-[![Instagram](./img/instagram.svg)](https://www.instagram.com/pranav_dhawale_19/)
-&nbsp;&nbsp;
-[![Mail](./img/gmail.svg)](mailto:pranavdhawale19@gmail.com)
+<a href="mailto:pranavdhawale19@gmail.com">
+<img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
+</a>
+<a href="https://www.linkedin.com/in/pranav-dhawale-324452212/" target="_blank" >
+<img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
+</a>
+<a href="https://www.instagram.com/pranav_dhawale_19" target="_blank">
+<img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" />
+</a>
+
+<br>
 
 <details>
-<summary>⚡ GitHub Stats</summary>
+<summary><h2>🔥 GitHub Stats</h2></summary>
 
-![Pranav's GitHub stats](https://github-readme-stats.pranavdhawale.vercel.app/api?username=pranavdhawale&custom_title=pranavdhawale's%20Github%20Stats&hide=issues,contribs&count_private=true&show_icons=true&include_all_commits=true&hide_border=true&theme=vision-friendly-dark&show_icons=true)
-
-![GitHub Streak](https://github-readme-streak-stats-pmd.herokuapp.com?user=pranavdhawale&theme=vision-friendly-dark&hide_border=true)
+[![GitHub Streak](https://streak-stats.demolab.com/?user=pranavdhawale&theme=midnight-purple&hide_border=true)](https://git.io/streak-stats)
 
 </details>
 
