@@ -57,7 +57,7 @@
 
 ---
 
-### ⚡ Recent Activity
+### Recent Activity :zap:
 
 <!--START_SECTION:activity-->
 
