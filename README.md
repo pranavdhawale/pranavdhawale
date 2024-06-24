@@ -55,7 +55,13 @@
 <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" />
 </a>
 
-<br>
+---
+
+### ⚡ Recent Activity
+
+<!--START_SECTION:activity-->
+
+---
 
 <details>
 <summary><h2>🔥 GitHub Stats</h2></summary>
