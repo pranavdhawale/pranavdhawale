@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&height=70&color=gradient&theme=gruvbox_light"/>
-</p>
-
 # Hola Amigos,<br> I'm Pranav Dhawale 👋
 
 <img src="./img/pd-banner.png">
@@ -9,10 +5,10 @@
 ## About Me: 🤗
 
 - 📚 I’m currently exploring DevOps & Cloud ☁️
-- 🥅 2024 Goals: Learn more about Docker and Kubernetes 🧑‍💻
-- 👯 I’m looking to collaborate on Real World Applications 😃
+- 🥅 2025 Goals: Learn more about Network 🧑‍💻
+- 👯 I’m looking to collaborate on Server Architecture & Networking 😃
 - ⚡ Fun fact: I ❤️ to Eat 🍽️ and Travel 🧳
-- 🎓 Education: Pursing B.Tech Computer Engineering at <abbr title="MUKESH PATEL SCHOOL OF TECHNOLOGY MANAGEMENT & ENGINEERING">MPSTME</abbr> 🖥️
+- 🎓 Education: Pursing B.Tech Computer Engineering at NMIMS's MUKESH PATEL SCHOOL OF TECHNOLOGY MANAGEMENT & ENGINEERING 🖥️
 
 ### Languages: 🧰
 
@@ -54,14 +50,6 @@
 <a href="https://www.instagram.com/pranav_dhawale_19" target="_blank">
 <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" />
 </a>
-
----
-
-### Recent Activity :zap:
-
-<!--START_SECTION:activity-->
-
-<!--END_SECTION:activity-->
 
 ---
 
