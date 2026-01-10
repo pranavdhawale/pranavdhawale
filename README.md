@@ -1,11 +1,11 @@
-# Hola Amigos,<br> I'm Pranav Dhawale 👋
+# नमस्कार 🙏🏻<br> <span title="प्रणव ढवळे">I'm Pranav Dhawale</span> 
 
 <img src="./img/pd-banner.png">
 
 ## About Me: 🤗
 
 - 📚 I’m currently exploring DevOps & Cloud ☁️
-- 🥅 2025 Goals: Learn more about Network 🧑‍💻
+- 🥅 2026 Goals: Learn more about Network 🧑‍💻
 - 👯 I’m looking to collaborate on Server Architecture & Networking 😃
 - ⚡ Fun fact: I ❤️ to Eat 🍽️ and Travel 🧳
 - 🎓 Education: Pursing B.Tech Computer Engineering at NMIMS's MUKESH PATEL SCHOOL OF TECHNOLOGY MANAGEMENT & ENGINEERING 🖥️
@@ -27,7 +27,6 @@
 
 ![MongoDB](https://img.shields.io/badge/MongoDB-4DB33D?style=for-the-badge&logo=mongodb&logoColor=3F3E42)
 ![MySQL](https://img.shields.io/badge/MYSQL-f29111?style=for-the-badge&logo=mysql&logoColor=00758F)
-![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
 ### Technologies: ⚙️
 
@@ -44,11 +43,8 @@
 <a href="mailto:pranavdhawale19@gmail.com">
 <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
 </a>
-<a href="https://www.linkedin.com/in/pranav-dhawale-324452212/" target="_blank" >
+<a href="https://www.linkedin.com/in/pranavdhawale" target="_blank" >
 <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
-</a>
-<a href="https://www.instagram.com/pranav_dhawale_19" target="_blank">
-<img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" />
 </a>
 
 ---
@@ -56,7 +52,7 @@
 <details>
 <summary><h2>🔥 GitHub Stats</h2></summary>
 
-[![GitHub Streak](https://streak-stats.demolab.com/?user=pranavdhawale&theme=midnight-purple&hide_border=true)](https://git.io/streak-stats)
+[![GitHub Streak](https://github-readme-streak-stats-eight-steel.vercel.app?user=pranavdhawale&theme=shadow-purple&border_radius=10&short_numbers=true)](https://git.io/streak-stats)
 
 </details>
 
