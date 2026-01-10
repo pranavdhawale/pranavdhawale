@@ -1,4 +1,4 @@
-# नमस्कार 🙏🏻<br> <span title="प्रणव ढवळे">I'm Pranav Dhawale</span> 
+# नमस्कार 🙏🏻<br> <span title="Pranav Dhawale">I'm प्रणव ढवळे</span>
 
 <img src="./img/pd-banner.png">
 
@@ -52,13 +52,13 @@
 <details>
 <summary><h2>🔥 GitHub Stats</h2></summary>
 
-[![GitHub Streak](https://github-readme-streak-stats-eight-steel.vercel.app?user=pranavdhawale&theme=shadow-purple&border_radius=10&short_numbers=true)](https://git.io/streak-stats)
+![GitHub Streak](https://github-readme-streak-stats-eight-steel.vercel.app?user=pranavdhawale&theme=midnight-purple&border_radius=10&short_numbers=true&border_radius=70)
 
 </details>
 
 <div align="right">
 
-![Github Profile Views](https://komarev.com/ghpvc/?username=pranavdhawale&color=181717&style=flat-square&label=Profile+Views)
+![Github Profile Views](https://komarev.com/ghpvc/?username=pranavdhawale&color=181717&style=flat-square&label=Profile+Views&)
 
 </div>
 
