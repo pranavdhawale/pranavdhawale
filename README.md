@@ -23,8 +23,16 @@ pranavdhawale@github:~$ whoami
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-pranavdhawale@github:~$ ./fetch-github-stats
+./fetch-github-stats
 
+GITHUB STATS
+────────────────────────────────
+Total Stars     :      3
+Followers       :      20
+Following       :      23
+Total Commits   :      0
+Current Streak  :      0 days
+Longest Streak  :      0 days
 GITHUB STATS
 ────────────────────────────────
 Total Stars     :      ...
