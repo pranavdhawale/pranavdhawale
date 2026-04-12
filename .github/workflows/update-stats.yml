@@ -188,9 +188,8 @@ jobs:
           CURRENT_STREAK="${{ steps.stats.outputs.current_streak }}"
           LONGEST_STREAK="${{ steps.stats.outputs.longest_streak }}"
 
-          # Create new stats block using printf to avoid YAML issues
-          printf './fetch-github-stats\n\n' > /tmp/stats_block.txt
-          printf 'GITHUB STATS\n' >> /tmp/stats_block.txt
+          # Create new stats block (no ./fetch-github-stats prefix - that's in the README)
+          printf 'GITHUB STATS\n' > /tmp/stats_block.txt
           printf '────────────────────────────────\n' >> /tmp/stats_block.txt
           printf 'Total Stars     :      %s\n' "$STARS" >> /tmp/stats_block.txt
           printf 'Followers       :      %s\n' "$FOLLOWERS" >> /tmp/stats_block.txt
@@ -198,18 +197,25 @@ jobs:
           printf 'Total Commits   :      %s\n' "$CONTRIBUTIONS" >> /tmp/stats_block.txt
           printf 'Current Streak  :      %s days\n' "$CURRENT_STREAK" >> /tmp/stats_block.txt
           printf 'Longest Streak  :      %s days\n' "$LONGEST_STREAK" >> /tmp/stats_block.txt
+          printf '\n' >> /tmp/stats_block.txt
 
-          # Replace in README using awk
+          # Replace stats block using state machine:
+          # 0 = normal (print), 1 = saw ./fetch-github-stats (skip until GITHUB STATS)
+          # 2 = saw GITHUB STATS (insert new block, skip until empty line)
           if grep -q "fetch-github-stats" README.md; then
             awk '
-            /\.\/fetch-github-stats/ { found=1 }
-            found && /^$/ {
+            BEGIN { state=0 }
+            /\.\/fetch-github-stats/ { state=1; next }
+            state==1 && /^$/ { next }
+            state==1 && /^GITHUB STATS/ {
+              state=2
               while((getline line < "/tmp/stats_block.txt") > 0) print line
               close("/tmp/stats_block.txt")
-              found=0
               next
             }
-            !found { print }
+            state==2 && /^$/ { state=0; next }
+            state>=1 { next }
+            { print }
             ' README.md > /tmp/README_NEW.md
             mv /tmp/README_NEW.md README.md
           fi
