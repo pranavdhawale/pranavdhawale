@@ -27,9 +27,6 @@ jobs:
           github-token: ${{ secrets.STATS_TOKEN || github.token }}
           script: |
             const username = context.repo.owner;
-            const token = process.env.GITHUB_TOKEN || '';
-            const hasToken = !!token;
-            core.info(`Token available: ${hasToken}`);
             core.info(`Username: ${username}`);
 
             function calculateStreaks(contributionDays) {
@@ -99,44 +96,42 @@ jobs:
 
             let totalContributions = 0, currentStreak = 0, longestStreak = 0;
 
-            if (hasToken) {
-              const currentYear = new Date().getUTCFullYear();
-              const queries = [];
-              for (let year = 2021; year <= currentYear; year++) {
-                const fromDate = `${year}-01-01T00:00:00Z`;
-                const toDate = year === currentYear ? new Date().toISOString() : `${year}-12-31T23:59:59Z`;
-                queries.push(github.graphql(`
-                  query($username: String!, $from: DateTime!, $to: DateTime!) {
-                    user(login: $username) {
-                      contributionsCollection(from: $from, to: $to) {
-                        contributionCalendar {
-                          totalContributions
-                          weeks { contributionDays { date contributionCount } }
-                        }
+            const currentYear = new Date().getUTCFullYear();
+            const queries = [];
+            for (let year = 2021; year <= currentYear; year++) {
+              const fromDate = `${year}-01-01T00:00:00Z`;
+              const toDate = year === currentYear ? new Date().toISOString() : `${year}-12-31T23:59:59Z`;
+              queries.push(github.graphql(`
+                query($username: String!, $from: DateTime!, $to: DateTime!) {
+                  user(login: $username) {
+                    contributionsCollection(from: $from, to: $to) {
+                      contributionCalendar {
+                        totalContributions
+                        weeks { contributionDays { date contributionCount } }
                       }
                     }
-                  }`, { username, from: fromDate, to: toDate }));
-              }
-
-              try {
-                const results = await Promise.all(queries);
-                const allDays = [];
-                results.forEach(r => {
-                  const cal = r?.user?.contributionsCollection?.contributionCalendar;
-                  if (cal) {
-                    totalContributions += cal.totalContributions || 0;
-                    cal.weeks?.forEach(w => w.contributionDays?.forEach(d => {
-                      if (d) allDays.push({ date: d.date, contributionCount: d.contributionCount });
-                    }));
                   }
-                });
-                const streaks = calculateStreaks(allDays);
-                currentStreak = streaks.currentStreak;
-                longestStreak = streaks.longestStreak;
-              } catch (e) {
-                core.error(`GraphQL contributions error: ${e.message}`);
-                core.error(`Stack: ${e.stack}`);
-              }
+                }`, { username, from: fromDate, to: toDate }));
+            }
+
+            try {
+              const results = await Promise.all(queries);
+              const allDays = [];
+              results.forEach(r => {
+                const cal = r?.user?.contributionsCollection?.contributionCalendar;
+                if (cal) {
+                  totalContributions += cal.totalContributions || 0;
+                  cal.weeks?.forEach(w => w.contributionDays?.forEach(d => {
+                    if (d) allDays.push({ date: d.date, contributionCount: d.contributionCount });
+                  }));
+                }
+              });
+              const streaks = calculateStreaks(allDays);
+              currentStreak = streaks.currentStreak;
+              longestStreak = streaks.longestStreak;
+            } catch (e) {
+              core.error(`GraphQL contributions error: ${e.message}`);
+              core.error(`Stack: ${e.stack}`);
             }
             core.info(`Total contributions: ${totalContributions}`);
             core.info(`Current streak: ${currentStreak}`);
