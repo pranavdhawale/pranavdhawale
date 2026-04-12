@@ -183,31 +183,29 @@ jobs:
           CURRENT_STREAK="${{ steps.stats.outputs.current_streak }}"
           LONGEST_STREAK="${{ steps.stats.outputs.longest_streak }}"
 
-          # Create new stats block
-          cat > /tmp/stats_block.txt << 'BLOCK'
-$ fetch-github-stats
+          # Create new stats block using printf to avoid YAML issues
+          printf './fetch-github-stats\n\n' > /tmp/stats_block.txt
+          printf 'GITHUB STATS\n' >> /tmp/stats_block.txt
+          printf '────────────────────────────────\n' >> /tmp/stats_block.txt
+          printf 'Total Stars     :      %s\n' "$STARS" >> /tmp/stats_block.txt
+          printf 'Followers       :      %s\n' "$FOLLOWERS" >> /tmp/stats_block.txt
+          printf 'Following       :      %s\n' "$FOLLOWING" >> /tmp/stats_block.txt
+          printf 'Total Commits   :      %s\n' "$CONTRIBUTIONS" >> /tmp/stats_block.txt
+          printf 'Current Streak  :      %s days\n' "$CURRENT_STREAK" >> /tmp/stats_block.txt
+          printf 'Longest Streak  :      %s days\n' "$LONGEST_STREAK" >> /tmp/stats_block.txt
 
-GITHUB STATS
-────────────────────────────────
-Total Stars     :      STARS_PLACEHOLDER
-Followers       :      FOLLOWERS_PLACEHOLDER
-Following       :      FOLLOWING_PLACEHOLDER
-Total Commits   :      COMMITS_PLACEHOLDER
-Current Streak  :      CURRENT_PLACEHOLDER days
-Longest Streak  :      LONGEST_PLACEHOLDER days
-BLOCK
-
-          # Replace placeholders
-          sed -i "s/STARS_PLACEHOLDER/$STARS/" /tmp/stats_block.txt
-          sed -i "s/FOLLOWERS_PLACEHOLDER/$FOLLOWERS/" /tmp/stats_block.txt
-          sed -i "s/FOLLOWING_PLACEHOLDER/$FOLLOWING/" /tmp/stats_block.txt
-          sed -i "s/COMMITS_PLACEHOLDER/$CONTRIBUTIONS/" /tmp/stats_block.txt
-          sed -i "s/CURRENT_PLACEHOLDER/$CURRENT_STREAK/" /tmp/stats_block.txt
-          sed -i "s/LONGEST_PLACEHOLDER/$LONGEST_STREAK/" /tmp/stats_block.txt
-
-          # Replace in README
+          # Replace in README using awk
           if grep -q "fetch-github-stats" README.md; then
-            awk '/\$ fetch-github-stats/{found=1; while((getline line < "/tmp/stats_block.txt") > 0) print line; close("/tmp/stats_block.txt"); next} found && /^$/{found=0} !found{print}' README.md > /tmp/README_NEW.md
+            awk '
+            /\.\/fetch-github-stats/ { found=1 }
+            found && /^$/ {
+              while((getline line < "/tmp/stats_block.txt") > 0) print line
+              close("/tmp/stats_block.txt")
+              found=0
+              next
+            }
+            !found { print }
+            ' README.md > /tmp/README_NEW.md
             mv /tmp/README_NEW.md README.md
           fi
 
