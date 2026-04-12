@@ -95,7 +95,7 @@ jobs:
               return Math.max(longestStreak, currentStreak);
             }
 
-            let totalContributions = 0, currentStreak = 0, longestStreak = 0;
+            let totalContributions = 0, totalPRs = 0, totalIssues = 0, currentStreak = 0, longestStreak = 0;
 
             const currentYear = new Date().getUTCFullYear();
             const now = new Date();
@@ -113,6 +113,8 @@ jobs:
                         totalContributions
                         weeks { contributionDays { date contributionCount } }
                       }
+                      totalPullRequestContributions
+                      totalIssueContributions
                     }
                   }
                 }`, { username, from: fromDate, to: toDate }));
@@ -122,10 +124,12 @@ jobs:
               const results = await Promise.all(queries);
               const allDays = [];
               results.forEach(r => {
-                const cal = r?.user?.contributionsCollection?.contributionCalendar;
-                if (cal) {
-                  totalContributions += cal.totalContributions || 0;
-                  cal.weeks?.forEach(w => w.contributionDays?.forEach(d => {
+                const collection = r?.user?.contributionsCollection;
+                if (collection) {
+                  totalContributions += collection.contributionCalendar?.totalContributions || 0;
+                  totalPRs += collection.totalPullRequestContributions || 0;
+                  totalIssues += collection.totalIssueContributions || 0;
+                  collection.contributionCalendar?.weeks?.forEach(w => w.contributionDays?.forEach(d => {
                     if (d) allDays.push({ date: d.date, contributionCount: d.contributionCount });
                   }));
                 }
@@ -138,6 +142,8 @@ jobs:
               core.error(`Stack: ${e.stack}`);
             }
             core.info(`Total contributions: ${totalContributions}`);
+            core.info(`Total PRs: ${totalPRs}`);
+            core.info(`Total Issues: ${totalIssues}`);
             core.info(`Current streak: ${currentStreak}`);
             core.info(`Longest streak: ${longestStreak}`);
 
@@ -146,7 +152,7 @@ jobs:
               const gu = await github.graphql(`
                 query($username: String!) {
                   user(login: $username) {
-                    login, name, avatarUrl
+                    login, name, avatarUrl, createdAt
                     repositories(privacy: PUBLIC) { totalCount }
                     followers { totalCount }
                     following { totalCount }
@@ -155,6 +161,7 @@ jobs:
               if (gu?.user) {
                 userData = {
                   login: gu.user.login, name: gu.user.name, avatar_url: gu.user.avatarUrl,
+                  created_at: gu.user.createdAt,
                   public_repos: gu.user.repositories?.totalCount || 0,
                   followers: gu.user.followers?.totalCount || 0,
                   following: gu.user.following?.totalCount || 0
@@ -163,8 +170,17 @@ jobs:
             } catch (e) {
               core.warning(`GraphQL user query failed: ${e.message}`);
               const { data: u } = await github.rest.users.getByUsername({ username });
-              userData = { login: u.login, name: u.name, avatar_url: u.avatar_url, public_repos: u.public_repos, followers: u.followers, following: u.following };
+              userData = { login: u.login, name: u.name, avatar_url: u.avatar_url, created_at: u.created_at, public_repos: u.public_repos, followers: u.followers, following: u.following };
             }
+
+            // Calculate account age in years
+            let accountAge = 0;
+            if (userData.created_at) {
+              const createdDate = new Date(userData.created_at);
+              const now = new Date();
+              accountAge = Math.floor((now - createdDate) / (365.25 * 24 * 60 * 60 * 1000));
+            }
+            core.info(`Account age: ${accountAge} years`);
 
             let repos = [];
             try {
@@ -184,26 +200,33 @@ jobs:
             const topLangs = Object.entries(langs).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([l]) => l).join(' · ') || 'N/A';
 
             core.setOutput('stars', totalStars);
-            core.setOutput('followers', userData.followers || 0);
-            core.setOutput('following', userData.following || 0);
+            core.setOutput('total_prs', totalPRs);
+            core.setOutput('total_issues', totalIssues);
             core.setOutput('total_contributions', totalContributions);
             core.setOutput('current_streak', currentStreak);
             core.setOutput('longest_streak', longestStreak);
+            core.setOutput('account_age', accountAge);
 
       - name: Update README
         run: |
           STARS="${{ steps.stats.outputs.stars }}"
+          PRS="${{ steps.stats.outputs.total_prs }}"
+          ISSUES="${{ steps.stats.outputs.total_issues }}"
           CONTRIBUTIONS="${{ steps.stats.outputs.total_contributions }}"
           CURRENT_STREAK="${{ steps.stats.outputs.current_streak }}"
           LONGEST_STREAK="${{ steps.stats.outputs.longest_streak }}"
+          ACCOUNT_AGE="${{ steps.stats.outputs.account_age }}"
 
           # Create new stats block (no ./fetch-github-stats prefix - that's in the README)
           printf 'GITHUB STATS\n' > /tmp/stats_block.txt
           printf '────────────────────────────────\n' >> /tmp/stats_block.txt
           printf 'Total Stars     :      %s\n' "$STARS" >> /tmp/stats_block.txt
-          printf 'Total Commits   :      %s\n' "$CONTRIBUTIONS" >> /tmp/stats_block.txt
+          printf 'Total PRs       :      %s\n' "$PRS" >> /tmp/stats_block.txt
+          printf 'Total Issues    :      %s\n' "$ISSUES" >> /tmp/stats_block.txt
+          printf 'Contributions   :      %s\n' "$CONTRIBUTIONS" >> /tmp/stats_block.txt
           printf 'Current Streak  :      %s days\n' "$CURRENT_STREAK" >> /tmp/stats_block.txt
           printf 'Longest Streak  :      %s days\n' "$LONGEST_STREAK" >> /tmp/stats_block.txt
+          printf 'Account Age     :      %s years\n' "$ACCOUNT_AGE" >> /tmp/stats_block.txt
           printf '\n' >> /tmp/stats_block.txt
 
           # Replace stats block using state machine:
