@@ -19,6 +19,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.STATS_TOKEN }}
+          fetch-depth: 0
 
       - name: Fetch GitHub Stats
         id: stats
@@ -97,10 +98,13 @@ jobs:
             let totalContributions = 0, currentStreak = 0, longestStreak = 0;
 
             const currentYear = new Date().getUTCFullYear();
+            const now = new Date();
             const queries = [];
-            for (let year = 2020; year <= currentYear; year++) {
+            for (let year = 2021; year <= currentYear; year++) {
               const fromDate = `${year}-01-01T00:00:00Z`;
-              const toDate = year === currentYear ? new Date().toISOString() : `${year}-12-31T23:59:59Z`;
+              const toDate = year === currentYear
+                ? new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())).toISOString()
+                : `${year}-12-31T23:59:59Z`;
               queries.push(github.graphql(`
                 query($username: String!, $from: DateTime!, $to: DateTime!) {
                   user(login: $username) {
@@ -230,4 +234,4 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add README.md
-          git diff --staged --quiet || (git commit -m "chore: update github stats [skip ci]" && git push)
+          git diff --staged --quiet || (git commit -m "chore: update github stats [skip ci]" && git pull --rebase && git push)
