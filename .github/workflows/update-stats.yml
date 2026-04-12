@@ -1,0 +1,318 @@
+name: Update GitHub Stats
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Run every Sunday at midnight UTC
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch GitHub Stats
+        id: stats
+        uses: actions/github-script@v7
+        with:
+          # Use STATS_TOKEN if available (includes private repos), otherwise fall back to GITHUB_TOKEN
+          github-token: ${{ secrets.STATS_TOKEN || secrets.GITHUB_TOKEN }}
+          script: |
+            const username = context.repo.owner;
+            const token = process.env.GITHUB_TOKEN || '';
+            const hasToken = !!token;
+
+            // Helper: Calculate streaks from contribution days
+            function calculateStreaks(contributionDays) {
+              // Sort descending (newest first)
+              const sortedDays = [...contributionDays].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+              const dayMap = new Map();
+              sortedDays.forEach(day => {
+                dayMap.set(day.date, day.contributionCount);
+              });
+
+              const today = new Date();
+              const todayUTC = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
+              const yesterdayUTC = new Date(todayUTC.getTime() - 24 * 60 * 60 * 1000);
+
+              const todayStr = todayUTC.toISOString().split('T')[0];
+              const yesterdayStr = yesterdayUTC.toISOString().split('T')[0];
+
+              // Calculate current streak
+              let currentStreak = 0;
+              const todayCount = dayMap.get(todayStr) || 0;
+              const yesterdayCount = dayMap.get(yesterdayStr) || 0;
+
+              if (todayCount > 0) {
+                // Streak continues from today
+                currentStreak = 1;
+                let checkDate = yesterdayUTC;
+                while (true) {
+                  const dateStr = checkDate.toISOString().split('T')[0];
+                  const count = dayMap.get(dateStr) || 0;
+                  if (count > 0) {
+                    currentStreak++;
+                    checkDate = new Date(checkDate.getTime() - 24 * 60 * 60 * 1000);
+                  } else {
+                    break;
+                  }
+                }
+              } else if (yesterdayCount > 0) {
+                // Streak continues from yesterday (today has no contributions yet)
+                currentStreak = 1;
+                let checkDate = new Date(yesterdayUTC.getTime() - 24 * 60 * 60 * 1000);
+                while (true) {
+                  const dateStr = checkDate.toISOString().split('T')[0];
+                  const count = dayMap.get(dateStr) || 0;
+                  if (count > 0) {
+                    currentStreak++;
+                    checkDate = new Date(checkDate.getTime() - 24 * 60 * 60 * 1000);
+                  } else {
+                    break;
+                  }
+                }
+              }
+
+              // Calculate longest streak
+              const longestStreak = calculateLongestStreak(sortedDays);
+
+              return { currentStreak, longestStreak };
+            }
+
+            function calculateLongestStreak(sortedDays) {
+              // Sort ascending (oldest first)
+              const ascendingDays = [...sortedDays].sort((a, b) => new Date(a.date) - new Date(b.date));
+
+              let longestStreak = 0;
+              let currentStreak = 0;
+              let prevDate = null;
+
+              for (const day of ascendingDays) {
+                if (day.contributionCount === 0) {
+                  longestStreak = Math.max(longestStreak, currentStreak);
+                  currentStreak = 0;
+                  prevDate = null;
+                  continue;
+                }
+
+                if (!prevDate) {
+                  currentStreak = 1;
+                } else {
+                  const expectedPrev = new Date(new Date(day.date).getTime() - 24 * 60 * 60 * 1000);
+                  if (prevDate.getTime() === expectedPrev.getTime()) {
+                    currentStreak++;
+                  } else {
+                    longestStreak = Math.max(longestStreak, currentStreak);
+                    currentStreak = 1;
+                  }
+                }
+
+                prevDate = new Date(day.date);
+              }
+
+              longestStreak = Math.max(longestStreak, currentStreak);
+              return longestStreak;
+            }
+
+            let totalContributions = 0;
+            let currentStreak = 0;
+            let longestStreak = 0;
+
+            // Mode 2: With Token - Fetch contributions via GraphQL
+            if (hasToken) {
+              const currentYear = new Date().getUTCFullYear();
+              const contributionQueries = [];
+
+              // Fetch contributions from 2021 to current year
+              for (let year = 2021; year <= currentYear; year++) {
+                const isCurrentYear = year === currentYear;
+                const fromDate = `${year}-01-01T00:00:00Z`;
+                const toDate = isCurrentYear
+                  ? new Date().toISOString()
+                  : `${year}-12-31T23:59:59Z`;
+
+                contributionQueries.push(
+                  github.graphql(`
+                    query($username: String!, $from: DateTime!, $to: DateTime!) {
+                      user(login: $username) {
+                        contributionsCollection(from: $from, to: $to) {
+                          contributionCalendar {
+                            totalContributions
+                            weeks {
+                              contributionDays {
+                                date
+                                contributionCount
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  `, { username, from: fromDate, to: toDate })
+                );
+              }
+
+              try {
+                const results = await Promise.all(contributionQueries);
+                const allContributionDays = [];
+
+                results.forEach(result => {
+                  if (result?.user?.contributionsCollection?.contributionCalendar) {
+                    const calendar = result.user.contributionsCollection.contributionCalendar;
+                    totalContributions += calendar.totalContributions || 0;
+
+                    calendar.weeks?.forEach(week => {
+                      week.contributionDays?.forEach(day => {
+                        if (day) {
+                          allContributionDays.push({
+                            date: day.date,
+                            contributionCount: day.contributionCount
+                          });
+                        }
+                      });
+                    });
+                  }
+                });
+
+                // Calculate streaks
+                const streaks = calculateStreaks(allContributionDays);
+                currentStreak = streaks.currentStreak;
+                longestStreak = streaks.longestStreak;
+              } catch (error) {
+                console.log('GraphQL error:', error.message);
+                // Fall through to REST API fallback
+              }
+            }
+
+            // Fetch user info via GraphQL (or REST fallback)
+            let userData = {};
+            try {
+              const graphqlUser = await github.graphql(`
+                query($username: String!) {
+                  user(login: $username) {
+                    login
+                    name
+                    avatarUrl
+                    repositories(privacy: PUBLIC) { totalCount }
+                    followers { totalCount }
+                    following { totalCount }
+                  }
+                }
+              `, { username });
+
+              if (graphqlUser?.user) {
+                userData = {
+                  login: graphqlUser.user.login,
+                  name: graphqlUser.user.name,
+                  avatar_url: graphqlUser.user.avatarUrl,
+                  public_repos: graphqlUser.user.repositories?.totalCount || 0,
+                  followers: graphqlUser.user.followers?.totalCount || 0,
+                  following: graphqlUser.user.following?.totalCount || 0
+                };
+              }
+            } catch (error) {
+              console.log('GraphQL user query failed, using REST:', error.message);
+              // REST fallback
+              const { data: user } = await github.rest.users.getByUsername({ username });
+              userData = {
+                login: user.login,
+                name: user.name,
+                avatar_url: user.avatar_url,
+                public_repos: user.public_repos,
+                followers: user.followers,
+                following: user.following
+              };
+            }
+
+            // Get repos for stars calculation - use owner's repos only (not collaborator repos)
+            let repos = [];
+            try {
+              const { data: allRepos } = await github.rest.repos.listForAuthenticatedUser({
+                per_page: 100,
+                affiliation: 'owner',
+                visibility: 'all'
+              });
+              repos = allRepos;
+            } catch (error) {
+              const { data: publicRepos } = await github.rest.repos.listForUser({
+                username: username,
+                per_page: 100
+              });
+              repos = publicRepos;
+            }
+
+            // Calculate total stars
+            const totalStars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+
+            // Count languages
+            const languages = {};
+            repos.forEach(repo => {
+              if (repo.language) {
+                languages[repo.language] = (languages[repo.language] || 0) + 1;
+              }
+            });
+            const topLanguages = Object.entries(languages)
+              .sort((a, b) => b[1] - a[1])
+              .slice(0, 3)
+              .map(([lang]) => lang)
+              .join(' · ');
+
+            // Private repo count
+            const privateRepos = repos.filter(r => r.private).length;
+            const repoCount = repos.length;
+
+            // Set outputs
+            core.setOutput('repos', repoCount);
+            core.setOutput('public_repos', userData.public_repos || 0);
+            core.setOutput('private_repos', privateRepos);
+            core.setOutput('stars', totalStars);
+            core.setOutput('followers', userData.followers || 0);
+            core.setOutput('following', userData.following || 0);
+            core.setOutput('languages', topLanguages || 'N/A');
+            core.setOutput('total_contributions', totalContributions);
+            core.setOutput('current_streak', currentStreak);
+            core.setOutput('longest_streak', longestStreak);
+
+      - name: Update README
+        run: |
+          STARS="${{ steps.stats.outputs.stars }}"
+          FOLLOWERS="${{ steps.stats.outputs.followers }}"
+          FOLLOWING="${{ steps.stats.outputs.following }}"
+          CONTRIBUTIONS="${{ steps.stats.outputs.total_contributions }}"
+          CURRENT_STREAK="${{ steps.stats.outputs.current_streak }}"
+          LONGEST_STREAK="${{ steps.stats.outputs.longest_streak }}"
+
+          # Create stats block matching README format
+          STATS_BLOCK="\$ fetch-github-stats
+
+GITHUB STATS
+────────────────────────────────
+Total Stars     :      $STARS
+Followers       :      $FOLLOWERS
+Following       :      $FOLLOWING
+Total Commits   :      $CONTRIBUTIONS
+Current Streak  :      $CURRENT_STREAK days
+Longest Streak  :      $LONGEST_STREAK days"
+
+          # Replace existing stats block (from fetch-github-stats to empty line before cat ~/skills.txt)
+          if grep -q "fetch-github-stats" README.md; then
+            # Use awk to replace the block between fetch-github-stats and the empty line before cat ~/skills.txt
+            awk -v block="$STATS_BLOCK" '
+              /\$ fetch-github-stats/ { print block; in_block=1; next }
+              in_block && /^$/ && prev_line ~ /days$/ { in_block=0 }
+              in_block { prev_line=$0; next }
+              !in_block { print }
+            ' README.md > README.md.tmp && mv README.md.tmp README.md
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git diff --staged --quiet || (git commit -m "chore: update github stats [skip ci]" && git push)
