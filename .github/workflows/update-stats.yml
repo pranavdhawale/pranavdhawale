@@ -200,21 +200,23 @@ jobs:
           printf '\n' >> /tmp/stats_block.txt
 
           # Replace stats block using state machine:
-          # 0 = normal (print), 1 = saw ./fetch-github-stats (skip until GITHUB STATS)
-          # 2 = saw GITHUB STATS (insert new block, skip until empty line)
+          # 0 = normal (print), 1 = after marker (skip until GITHUB STATS)
+          # 2 = in old stats block (skip until empty line)
           if grep -q "fetch-github-stats" README.md; then
             awk '
             BEGIN { state=0 }
-            /\.\/fetch-github-stats/ { state=1; next }
-            state==1 && /^$/ { next }
-            state==1 && /^GITHUB STATS/ {
-              state=2
+            /\.\/fetch-github-stats/ {
+              print
+              print ""
               while((getline line < "/tmp/stats_block.txt") > 0) print line
               close("/tmp/stats_block.txt")
+              state=1
               next
             }
+            state==1 && /^GITHUB STATS/ { state=2; next }
+            state==1 { next }
             state==2 && /^$/ { state=0; next }
-            state>=1 { next }
+            state==2 { next }
             { print }
             ' README.md > /tmp/README_NEW.md
             mv /tmp/README_NEW.md README.md

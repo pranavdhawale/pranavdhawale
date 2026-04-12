@@ -23,6 +23,8 @@ pranavdhawale@github:~$ whoami
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
+pranavdhawale@github:~$ ./fetch-github-stats
+
 GITHUB STATS
 ────────────────────────────────
 Total Stars     :      3
