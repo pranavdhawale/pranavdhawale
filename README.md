@@ -30,9 +30,9 @@ GITHUB STATS
 Total Stars     :      3
 Followers       :      20
 Following       :      23
-Total Commits   :      0
-Current Streak  :      0 days
-Longest Streak  :      0 days
+Total Commits   :      1821
+Current Streak  :      14 days
+Longest Streak  :      14 days
 
 pranavdhawale@github:~$ cat ~/skills.txt
 
