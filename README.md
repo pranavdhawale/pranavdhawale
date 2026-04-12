@@ -28,7 +28,7 @@ pranavdhawale@github:~$ ./fetch-github-stats
 GITHUB STATS
 ────────────────────────────────
 Total Stars     :      3
-Total Commits   :      1823
+Total Commits   :      2196
 Current Streak  :      14 days
 Longest Streak  :      14 days
 
