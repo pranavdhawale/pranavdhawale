@@ -4,12 +4,12 @@ pranavdhawale@github:~$ whoami
                              &&&&&&
                              &&& &&             pranavdhawale@github
                              &&& &&             ────────────────────────────────
-                             &&& &&             Role:     DevOps & Cloud
-&& &&&&&&&&&&&&     &&&&&&&&&&&& &&             Focus:    Networking
-&& &&&&       &&& &&&&     &&&&& &&             Status:   Active ●
-&& &&&       &&&&&&      &&& &&& &&             Edu:      B.Tech CE @ MPSTME
-&& &&&     &&& &&&&&    &&& &&&& &&             Locale:   Mumbai, India
-&& &&&   &&&  &&& &&& &&&  &&&&& &&             Theme:    cyberpunk
+                             &&& &&             Name:     Pranav Dhawale
+&& &&&&&&&&&&&&     &&&&&&&&&&&& &&             Role:     DevOps & Cloud
+&& &&&&       &&& &&&&     &&&&& &&             Focus:    Networking
+&& &&&       &&&&&&      &&& &&& &&             Status:   Active ●
+&& &&&     &&& &&&&&    &&& &&&& &&             Edu:      B.Tech CE @ NMIMS, MPSTME
+&& &&&   &&&  &&& &&& &&&  &&&&& &&             Locale:   Mumbai, India
 && &&&  &&& &&&&& &&&&&  &&& &&& &&             Uptime:   Always online
 && &&&&&& &&&&&&& &&&& &&&   &&& &&             Fun Fact: Eat & Travel
 && &&&&  &&&   &&&&&  &&&    &&& &&
@@ -40,7 +40,7 @@ pranavdhawale@github:~$ cat ~/skills.txt
     Languages  : Python · JavaScript · C · C++
     Frameworks : Node.js · Express · React
     Database   : MongoDB · MySQL
-    Tools      : Docker · JWT · Linux · Git · GitHub
+    Tools      : Docker · JWT · Linux · Git · Self-hosted
 
 pranavdhawale@github:~$ ping -c 1 social
 
