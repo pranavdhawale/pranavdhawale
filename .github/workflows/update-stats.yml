@@ -287,27 +287,19 @@ jobs:
           CURRENT_STREAK="${{ steps.stats.outputs.current_streak }}"
           LONGEST_STREAK="${{ steps.stats.outputs.longest_streak }}"
 
-          # Create stats block matching README format
-          STATS_BLOCK="\$ fetch-github-stats
+          # Create stats block matching README format using printf
+          STATS_BLOCK=$(printf '\$ fetch-github-stats\n\nGITHUB STATS\n────────────────────────────────\nTotal Stars     :      %s\nFollowers       :      %s\nFollowing       :      %s\nTotal Commits   :      %s\nCurrent Streak  :      %s days\nLongest Streak  :      %s days' "$STARS" "$FOLLOWERS" "$FOLLOWING" "$CONTRIBUTIONS" "$CURRENT_STREAK" "$LONGEST_STREAK")
 
-GITHUB STATS
-────────────────────────────────
-Total Stars     :      $STARS
-Followers       :      $FOLLOWERS
-Following       :      $FOLLOWING
-Total Commits   :      $CONTRIBUTIONS
-Current Streak  :      $CURRENT_STREAK days
-Longest Streak  :      $LONGEST_STREAK days"
-
-          # Replace existing stats block (from fetch-github-stats to empty line before cat ~/skills.txt)
+          # Replace existing stats block using sed
           if grep -q "fetch-github-stats" README.md; then
-            # Use awk to replace the block between fetch-github-stats and the empty line before cat ~/skills.txt
-            awk -v block="$STATS_BLOCK" '
-              /\$ fetch-github-stats/ { print block; in_block=1; next }
-              in_block && /^$/ && prev_line ~ /days$/ { in_block=0 }
-              in_block { prev_line=$0; next }
-              !in_block { print }
-            ' README.md > README.md.tmp && mv README.md.tmp README.md
+            # Create a temp file with the new content
+            echo "$STATS_BLOCK" > /tmp/stats_block.txt
+            # Use sed to replace content between fetch-github-stats and the empty line before cat
+            sed -i '/\$ fetch-github-stats/,/^$/c\
+PLACEHOLDER_MARKER\
+' README.md
+            sed -i 's/PLACEHOLDER_MARKER/'"$(cat /tmp/stats_block.txt | sed 's/[\/&]/\\&/g')"'/g' README.md
+            rm -f /tmp/stats_block.txt
           fi
 
       - name: Commit and push changes
