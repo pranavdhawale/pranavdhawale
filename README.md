@@ -28,8 +28,6 @@ pranavdhawale@github:~$ ./fetch-github-stats
 GITHUB STATS
 ────────────────────────────────
 Total Stars     :      3
-Followers       :      20
-Following       :      23
 Total Commits   :      1821
 Current Streak  :      14 days
 Longest Streak  :      14 days

@@ -98,7 +98,7 @@ jobs:
 
             const currentYear = new Date().getUTCFullYear();
             const queries = [];
-            for (let year = 2021; year <= currentYear; year++) {
+            for (let year = 2020; year <= currentYear; year++) {
               const fromDate = `${year}-01-01T00:00:00Z`;
               const toDate = year === currentYear ? new Date().toISOString() : `${year}-12-31T23:59:59Z`;
               queries.push(github.graphql(`
@@ -189,8 +189,6 @@ jobs:
       - name: Update README
         run: |
           STARS="${{ steps.stats.outputs.stars }}"
-          FOLLOWERS="${{ steps.stats.outputs.followers }}"
-          FOLLOWING="${{ steps.stats.outputs.following }}"
           CONTRIBUTIONS="${{ steps.stats.outputs.total_contributions }}"
           CURRENT_STREAK="${{ steps.stats.outputs.current_streak }}"
           LONGEST_STREAK="${{ steps.stats.outputs.longest_streak }}"
@@ -199,8 +197,6 @@ jobs:
           printf 'GITHUB STATS\n' > /tmp/stats_block.txt
           printf '────────────────────────────────\n' >> /tmp/stats_block.txt
           printf 'Total Stars     :      %s\n' "$STARS" >> /tmp/stats_block.txt
-          printf 'Followers       :      %s\n' "$FOLLOWERS" >> /tmp/stats_block.txt
-          printf 'Following       :      %s\n' "$FOLLOWING" >> /tmp/stats_block.txt
           printf 'Total Commits   :      %s\n' "$CONTRIBUTIONS" >> /tmp/stats_block.txt
           printf 'Current Streak  :      %s days\n' "$CURRENT_STREAK" >> /tmp/stats_block.txt
           printf 'Longest Streak  :      %s days\n' "$LONGEST_STREAK" >> /tmp/stats_block.txt
