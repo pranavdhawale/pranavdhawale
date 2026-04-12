@@ -23,8 +23,6 @@ pranavdhawale@github:~$ whoami
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-./fetch-github-stats
-
 GITHUB STATS
 ────────────────────────────────
 Total Stars     :      3
@@ -33,14 +31,6 @@ Following       :      23
 Total Commits   :      0
 Current Streak  :      0 days
 Longest Streak  :      0 days
-GITHUB STATS
-────────────────────────────────
-Total Stars     :      ...
-Followers       :      ...
-Following       :      ...
-Total Commits   :      ...
-Current Streak  :      ... days
-Longest Streak  :      ... days
 
 pranavdhawale@github:~$ cat ~/skills.txt
 
