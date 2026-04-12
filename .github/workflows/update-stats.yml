@@ -24,11 +24,13 @@ jobs:
         id: stats
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.STATS_TOKEN || secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.STATS_TOKEN || github.token }}
           script: |
             const username = context.repo.owner;
             const token = process.env.GITHUB_TOKEN || '';
             const hasToken = !!token;
+            core.info(`Token available: ${hasToken}`);
+            core.info(`Username: ${username}`);
 
             function calculateStreaks(contributionDays) {
               const sortedDays = [...contributionDays].sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -131,8 +133,14 @@ jobs:
                 const streaks = calculateStreaks(allDays);
                 currentStreak = streaks.currentStreak;
                 longestStreak = streaks.longestStreak;
-              } catch (e) { console.log('GraphQL error:', e.message); }
+              } catch (e) {
+                core.error(`GraphQL contributions error: ${e.message}`);
+                core.error(`Stack: ${e.stack}`);
+              }
             }
+            core.info(`Total contributions: ${totalContributions}`);
+            core.info(`Current streak: ${currentStreak}`);
+            core.info(`Longest streak: ${longestStreak}`);
 
             let userData = {};
             try {
@@ -154,6 +162,7 @@ jobs:
                 };
               }
             } catch (e) {
+              core.warning(`GraphQL user query failed: ${e.message}`);
               const { data: u } = await github.rest.users.getByUsername({ username });
               userData = { login: u.login, name: u.name, avatar_url: u.avatar_url, public_repos: u.public_repos, followers: u.followers, following: u.following };
             }
@@ -163,11 +172,14 @@ jobs:
               const { data: r } = await github.rest.repos.listForAuthenticatedUser({ per_page: 100, affiliation: 'owner', visibility: 'all' });
               repos = r;
             } catch (e) {
+              core.warning(`listForAuthenticatedUser failed: ${e.message}`);
               const { data: r } = await github.rest.repos.listForUser({ username, per_page: 100 });
               repos = r;
             }
 
             const totalStars = repos.reduce((s, r) => s + (r.stargazers_count || 0), 0);
+            core.info(`Total stars: ${totalStars}`);
+            core.info(`Repos found: ${repos.length}`);
             const langs = {};
             repos.forEach(r => { if (r.language) langs[r.language] = (langs[r.language] || 0) + 1; });
             const topLangs = Object.entries(langs).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([l]) => l).join(' · ') || 'N/A';
