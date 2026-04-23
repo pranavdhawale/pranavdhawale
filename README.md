@@ -11,7 +11,7 @@ pranavdhawale@github:~$ whoami
 && &&&     &&& &&&&&    &&& &&&& &&             Edu:      B.Tech CE @ NMIMS, MPSTME
 && &&&   &&&  &&& &&& &&&  &&&&& &&             Locale:   Mumbai, India
 && &&&  &&& &&&&& &&&&&  &&& &&& &&             Uptime:   Always online
-&& &&&&&& &&&&&&& &&&& &&&   &&& &&             Fun Fact: Eat & Travel
+&& &&&&&& &&&&&&& &&&& &&&   &&& &&             Hobbies: Eat & Travel
 && &&&&  &&&   &&&&&  &&&    &&& &&
 && &&& &&&      &&& &&&      &&& &&
 && &&&&&&     &&&&&&&        &&& &&
