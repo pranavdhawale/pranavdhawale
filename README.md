@@ -28,11 +28,11 @@ pranavdhawale@github:~$ ./fetch-github-stats
 GITHUB STATS
 ────────────────────────────────
 Total Stars     :      11
-Total PRs       :      178
+Total PRs       :      179
 Total Issues    :      11
-Contributions   :      2309
-Current Streak  :      26 days
-Longest Streak  :      26 days
+Contributions   :      2317
+Current Streak  :      28 days
+Longest Streak  :      28 days
 Account Age     :      5 years
 
 pranavdhawale@github:~$ cat ~/skills.txt
