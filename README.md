@@ -31,7 +31,7 @@ Total Stars     :      25
 Total PRs       :      169
 Total Issues    :      11
 Contributions   :      2144
-Current Streak  :      32 days
+Current Streak  :      0 days
 Longest Streak  :      32 days
 Account Age     :      5 years
 
