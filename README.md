@@ -30,7 +30,7 @@ GITHUB STATS
 Total Stars     :      25
 Total PRs       :      169
 Total Issues    :      11
-Contributions   :      2147
+Contributions   :      2146
 Current Streak  :      0 days
 Longest Streak  :      32 days
 Account Age     :      5 years
